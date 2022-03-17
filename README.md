@@ -1,6 +1,6 @@
 # **Formula1 Season 2022**
 
-This repository contains andrid app that showcases Schedule for Formula 1 - 2022 Season starting on 20 March 2022.
+This repository contains android app that showcases Schedule for Formula 1 - 2022 Season starting on 20 March 2022.
 
 ## **Data/Api Provider:**
 Ergast Developer API,  
