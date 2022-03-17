@@ -2,18 +2,18 @@
 
 This repository contains android app that showcases Schedule for Formula 1 - 2022 Season starting on 20 March 2022.
 
-## **Data/Api Provider:**
+### **Data/Api Provider:**
 Ergast Developer API,  
 Url: https://ergast.com/api/f1/2022.json
 
 
-## **Components Used**
+### **Components Used**
 
 1. Api Service - Retrofit
 2. Dependency Injection – Dagger-Hilt
 3. Concurrency - Kotlin Coroutines & LiveData
 
-## **Architecture**
+### **Architecture**
 
 The architecture used is MVVM. The project structure is defined as below:
 
