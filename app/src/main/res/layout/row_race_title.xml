@@ -6,20 +6,20 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/text_round"
+        android:id="@+id/text_title_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Round"
         android:textColor="@color/bg_blue_dark"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/text_date_time"
+        app:layout_constraintBottom_toBottomOf="@+id/text_title_right"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text_date_time" />
+        app:layout_constraintTop_toTopOf="@+id/text_title_right" />
 
     <TextView
-        android:id="@+id/text_race"
+        android:id="@+id/text_title_center"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -27,20 +27,20 @@
         android:textColor="@color/bg_blue_dark"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/text_date_time"
+        app:layout_constraintBottom_toBottomOf="@+id/text_title_right"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toEndOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/text_date_time" />
+        app:layout_constraintTop_toTopOf="@+id/text_title_right" />
 
     <TextView
-        android:id="@+id/text_date_time"
+        android:id="@+id/text_title_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date/Time"
         android:textColor="@color/bg_blue_dark"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/text_race"
+        app:layout_constraintBottom_toBottomOf="@+id/text_title_center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_date_time" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title_right" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

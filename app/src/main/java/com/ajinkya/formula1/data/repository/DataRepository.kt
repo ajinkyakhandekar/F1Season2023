@@ -7,4 +7,8 @@ class DataRepository @Inject constructor(private val apiService: ApiService) : R
 
     override suspend fun getSchedule()  = apiService.getSchedule()
 
+    override suspend fun getDriverStandings()  = apiService.getDriverStandings()
+
+    override suspend fun getConstructorStandings()  = apiService.getConstructorStandings()
+
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_schedule">
+
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="com.ajinkya.formula1.ui.fragment.ScheduleFragment"
+        android:label="@string/title_schedule"
+        tools:layout="@layout/fragment_schedule" />
+
+    <fragment
+        android:id="@+id/navigation_driver"
+        android:name="com.ajinkya.formula1.ui.fragment.DriverFragment"
+        android:label="@string/title_driver"
+        tools:layout="@layout/fragment_driver" />
+
+    <fragment
+        android:id="@+id/navigation_constructor"
+        android:name="com.ajinkya.formula1.ui.fragment.ConstructorFragment"
+        android:label="@string/title_constructor"
+        tools:layout="@layout/fragment_constructor" />
+</navigation>

@@ -1,4 +1,4 @@
-package com.ajinkya.formula1.ui
+package com.ajinkya.formula1.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
