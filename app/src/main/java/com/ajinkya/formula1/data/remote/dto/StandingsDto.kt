@@ -1,4 +1,4 @@
-package com.ajinkya.formula1.data.entity
+package com.ajinkya.formula1.data.remote.dto
 
 data class StandingsResponse(
     var MRData: MRDataStandings = MRDataStandings()

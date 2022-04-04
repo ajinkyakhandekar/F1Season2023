@@ -5,13 +5,13 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.ajinkya.formula1.common.toast
-import com.ajinkya.formula1.data.entity.ConstructorStanding
+import com.ajinkya.formula1.data.remote.dto.ConstructorStanding
 import com.ajinkya.formula1.databinding.FragmentDriverBinding
 import com.ajinkya.formula1.databinding.RowRacesBinding
 import com.ajinkya.formula1.ui.adapter.RecyclerAdapter
 import com.ajinkya.formula1.ui.adapter.withAdapter
-import com.ajinkya.formula1.viewmodel.StandingsViewModel
-import com.ajinkya.formula1.viewmodel.Status
+import com.ajinkya.formula1.ui.viewmodel.StandingsViewModel
+import com.ajinkya.formula1.ui.viewmodel.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

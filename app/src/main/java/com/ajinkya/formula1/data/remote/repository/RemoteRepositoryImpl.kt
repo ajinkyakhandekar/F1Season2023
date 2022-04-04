@@ -1,9 +1,9 @@
-package com.ajinkya.formula1.data.repository
+package com.ajinkya.formula1.data.remote.repository
 
-import com.ajinkya.formula1.data.service.ApiService
+import com.ajinkya.formula1.data.remote.service.ApiService
 import javax.inject.Inject
 
-class DataRepository @Inject constructor(private val apiService: ApiService) : Repository {
+class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiService) : RemoteRepository {
 
     override suspend fun getSchedule()  = apiService.getSchedule()
 

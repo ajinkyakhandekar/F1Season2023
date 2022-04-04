@@ -4,13 +4,9 @@ import android.app.Activity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.BuildConfig
-import com.ajinkya.formula1.common.Constant.TAG
 import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
 
 fun Any?.log(tag: String = "") {
     if (BuildConfig.DEBUG) Log.v(Constant.TAG, "$tag : $this")

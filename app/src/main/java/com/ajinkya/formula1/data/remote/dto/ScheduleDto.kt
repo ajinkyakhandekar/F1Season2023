@@ -1,9 +1,23 @@
-package com.ajinkya.formula1.data.entity
+package com.ajinkya.formula1.data.remote.dto
+
+import com.ajinkya.formula1.data.local.entity.ScheduleEntity
 
 
-data class ScheduleResponse(
+data class ScheduleDto(
     var MRData: MRData = MRData()
-)
+) {
+    fun mapSchedule(): List<ScheduleEntity> {
+        return MRData.RaceTable.Races.map {
+            ScheduleEntity(
+                round = it.round,
+                raceName = it.raceName,
+                country = it.Circuit.Location.country,
+                date = it.date,
+                time = it.time
+            )
+        }
+    }
+}
 
 data class MRData(
     var RaceTable: RaceTable = RaceTable(),

@@ -1,15 +1,15 @@
-package com.ajinkya.formula1.data.service
+package com.ajinkya.formula1.data.remote.service
 
 import com.ajinkya.formula1.common.Constant
-import com.ajinkya.formula1.data.entity.ScheduleResponse
-import com.ajinkya.formula1.data.entity.StandingsResponse
+import com.ajinkya.formula1.data.remote.dto.ScheduleDto
+import com.ajinkya.formula1.data.remote.dto.StandingsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
 
     @GET(Constant.SEASON_2022)
-    suspend fun getSchedule() : Response<ScheduleResponse>
+    suspend fun getSchedule() : ScheduleDto
 
     @GET(Constant.STANDING_DRIVER_2022)
     suspend fun getDriverStandings() : Response<StandingsResponse>
