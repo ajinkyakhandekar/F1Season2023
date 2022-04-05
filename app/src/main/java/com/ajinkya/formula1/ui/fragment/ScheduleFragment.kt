@@ -2,19 +2,16 @@ package com.ajinkya.formula1.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.ajinkya.formula1.common.convertDate
-import com.ajinkya.formula1.common.convertTime
-import com.ajinkya.formula1.common.toast
-import com.ajinkya.formula1.data.local.entity.ScheduleEntity
+import com.ajinkya.formula1.common.*
 import com.ajinkya.formula1.databinding.FragmentScheduleBinding
 import com.ajinkya.formula1.databinding.RowRacesBinding
 import com.ajinkya.formula1.domain.model.Schedule
 import com.ajinkya.formula1.ui.adapter.RecyclerAdapter
 import com.ajinkya.formula1.ui.adapter.withAdapter
-import com.ajinkya.formula1.ui.state.ScheduleState
 import com.ajinkya.formula1.ui.viewmodel.ScheduleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -30,18 +27,22 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
-        setLiveDataObservers()
+        setObservers()
     }
 
     private fun setRecyclerView() {
         scheduleAdapter = binding.recyclerSchedule.withAdapter(
             RowRacesBinding::inflate
-        ) { schedule, _ ->
-            textRound.text = schedule.round
-            textRace.text = "${schedule.raceName}\n${schedule.country}"
+        ) { schedule, itemDetails ->
+            val raceName = "${schedule.raceName}\n${schedule.country}"
             val date = convertDate(schedule.date)
             val time = convertTime(schedule.time)
-            textDateTime.text = "$date\n$time"
+            val dateTime = "$date\n$time"
+
+            binding.textRound.text = schedule.round
+            binding.textRace.text = raceName
+            binding.textDateTime.text = dateTime
+            binding.viewDivider.isGone = itemDetails.isLast
         }
 
         /*scheduleAdapter.setClickListeners = { raceList ->
@@ -51,22 +52,18 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>(
         }*/
     }
 
-    private fun setLiveDataObservers() {
+    private fun setObservers() {
         lifecycleScope.launchWhenStarted {
             scheduleViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is ScheduleState.Loading -> {
-                        binding.progressBar.isVisible = true
-                    }
-                    is ScheduleState.Success -> {
-                        binding.progressBar.isVisible = false
-                        binding.cardSchedule.isVisible = true
-                        scheduleAdapter.updateData(uiState.schedule)
-                    }
-                    is ScheduleState.Error -> {
-                        binding.progressBar.isVisible = false
-                        toast(uiState.error)
-                    }
+
+                uiState.jsonString.log("ui state")
+
+                binding.progressBar.isVisible = uiState.isLoading
+                binding.cardSchedule.isVisible = uiState.schedule.isNotEmpty()
+                scheduleAdapter.updateData(uiState.schedule)
+
+                uiState.errorMessage.ifNotEmpty {
+                    toast(uiState.errorMessage)
                 }
             }
         }

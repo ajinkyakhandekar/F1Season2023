@@ -14,4 +14,6 @@ object Constant {
     const val CONSTRUCTOR_TABLE = "CONSTRUCTOR_TABLE"
 
     const val MSG_ERROR = "Api Error"
+    const val MSG_HTTP_ERROR = "Something went wrong! Please try again"
+    const val MSG_IO_ERROR = "Couldn't reach server, check your internet connection"
 }

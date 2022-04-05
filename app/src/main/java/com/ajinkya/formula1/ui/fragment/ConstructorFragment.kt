@@ -10,8 +10,7 @@ import com.ajinkya.formula1.databinding.FragmentDriverBinding
 import com.ajinkya.formula1.databinding.RowRacesBinding
 import com.ajinkya.formula1.ui.adapter.RecyclerAdapter
 import com.ajinkya.formula1.ui.adapter.withAdapter
-import com.ajinkya.formula1.ui.viewmodel.StandingsViewModel
-import com.ajinkya.formula1.ui.viewmodel.Status
+import com.ajinkya.formula1.ui.viewmodel.ConstructorStandingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +18,7 @@ class ConstructorFragment : BaseFragment<FragmentDriverBinding>(
     FragmentDriverBinding::inflate
 ) {
 
-    private val standingsViewModel: StandingsViewModel by viewModels()
+    private val standingsViewModel: ConstructorStandingsViewModel by viewModels()
     private lateinit var standingsAdapter: RecyclerAdapter<ConstructorStanding, RowRacesBinding>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,20 +31,20 @@ class ConstructorFragment : BaseFragment<FragmentDriverBinding>(
         }
 
         setRecyclerView()
-        setLiveDataObservers()
+       // setLiveDataObservers()
     }
 
     private fun setRecyclerView() {
         standingsAdapter = binding.recyclerSchedule.withAdapter(
             RowRacesBinding::inflate
         ) { constructorStanding, _ ->
-            textRound.text = constructorStanding.position
-            textRace.text = constructorStanding.Constructor.name
-            textDateTime.text = constructorStanding.points
+            binding.textRound.text = constructorStanding.position
+            binding.textRace.text = constructorStanding.Constructor.name
+            binding.textDateTime.text = constructorStanding.points
         }
     }
 
-    private fun setLiveDataObservers() {
+    /*private fun setLiveDataObservers() {
         standingsViewModel.constructorStandingsList.observe(this) { response ->
             when (response.status) {
                 Status.LOADING -> {
@@ -65,5 +64,5 @@ class ConstructorFragment : BaseFragment<FragmentDriverBinding>(
                 }
             }
         }
-    }
+    }*/
 }

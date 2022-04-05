@@ -1,6 +1,6 @@
 package com.ajinkya.formula1.data.remote.dto
 
-data class StandingsResponse(
+data class StandingsDto(
     var MRData: MRDataStandings = MRDataStandings()
 )
 
@@ -27,8 +27,8 @@ data class StandingsLists(
 )
 
 data class DriverStanding(
-    var Constructors: MutableList<Constructor> = mutableListOf(),
-    var Driver: Driver = Driver(),
+    var Constructors: MutableList<ConstructorDto> = mutableListOf(),
+    var Driver: DriverDto = DriverDto(),
     var points: String = "",
     var position: String = "",
     var positionText: String = "",
@@ -36,21 +36,21 @@ data class DriverStanding(
 )
 
 data class ConstructorStanding(
-    var Constructor: Constructor = Constructor(),
+    var Constructor: ConstructorDto = ConstructorDto(),
     var points: String = "",
     var position: String = "",
     var positionText: String = "",
     var wins: String = ""
 )
 
-data class Constructor(
+data class ConstructorDto(
     var constructorId: String = "",
     var name: String = "",
     var nationality: String = "",
     var url: String = ""
 )
 
-data class Driver(
+data class DriverDto(
     var code: String = "",
     var dateOfBirth: String = "",
     var driverId: String = "",

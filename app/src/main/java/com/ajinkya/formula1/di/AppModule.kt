@@ -5,13 +5,14 @@ import androidx.room.Room
 import com.ajinkya.formula1.common.Constant
 import com.ajinkya.formula1.data.local.database.F1Dao
 import com.ajinkya.formula1.data.local.database.F1Database
-import com.ajinkya.formula1.data.local.repository.LocalRepository
-import com.ajinkya.formula1.data.local.repository.LocalRepositoryImpl
-import com.ajinkya.formula1.data.remote.repository.RemoteRepository
-import com.ajinkya.formula1.data.remote.repository.RemoteRepositoryImpl
+import com.ajinkya.formula1.data.local.data_source.LocalDataSource
+import com.ajinkya.formula1.data.remote.data_source.RemoteDataSource
 import com.ajinkya.formula1.data.remote.service.ApiService
-import com.ajinkya.formula1.data.repository.F1Repository
-import com.ajinkya.formula1.data.repository.F1RepositoryImpl
+import com.ajinkya.formula1.data.repository.ConstructorStandingsRepository
+import com.ajinkya.formula1.data.repository.DriverStandingsRepository
+import com.ajinkya.formula1.data.repository.ScheduleRepository
+import com.ajinkya.formula1.domain.use_case.GetConstructorStandingsUseCase
+import com.ajinkya.formula1.domain.use_case.GetDriverStandingsUseCase
 import com.ajinkya.formula1.domain.use_case.GetScheduleUseCase
 import dagger.Module
 import dagger.Provides
@@ -57,37 +58,59 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDao(db: F1Database) = db.f1Dao()
-
+    fun provideDao(db: F1Database) : F1Dao = db.f1Dao()
 
     @Provides
     @Singleton
-    fun provideLocalRepository(
-        f1Dao: F1Dao
-    ): LocalRepository {
-        return LocalRepositoryImpl(f1Dao)
+    fun provideLocalDataSource(f1Dao: F1Dao): LocalDataSource {
+        return LocalDataSource(f1Dao)
     }
 
     @Provides
     @Singleton
-    fun provideRemoteRepository(
-        apiService: ApiService
-    ): RemoteRepository {
-        return RemoteRepositoryImpl(apiService)
+    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource {
+        return RemoteDataSource(apiService)
     }
 
     @Provides
     @Singleton
-    fun provideF1Repository(
-        localRepository: LocalRepository,
-        remoteRepository: RemoteRepository
-    ): F1Repository {
-        return F1RepositoryImpl(localRepository, remoteRepository)
+    fun provideScheduleRepository(
+        localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource
+    ): ScheduleRepository {
+        return ScheduleRepository(localDataSource, remoteDataSource)
     }
 
     @Provides
     @Singleton
-    fun provideGetScheduleUseCase(repository: F1Repository): GetScheduleUseCase {
-        return GetScheduleUseCase(repository)
+    fun provideDriverStandingsRepository(
+        localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource
+    ): DriverStandingsRepository {
+        return DriverStandingsRepository(localDataSource, remoteDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideConstructorStandingsRepository(
+        localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource
+    ): ConstructorStandingsRepository {
+        return ConstructorStandingsRepository(localDataSource, remoteDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideScheduleUseCase(scheduleRepository: ScheduleRepository): GetScheduleUseCase {
+        return GetScheduleUseCase(scheduleRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideConstructorStandingsUseCase(constructorStandingsRepository: ConstructorStandingsRepository): GetConstructorStandingsUseCase {
+        return GetConstructorStandingsUseCase(constructorStandingsRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDriverStandingsUseCase(driverStandingsRepository: DriverStandingsRepository): GetDriverStandingsUseCase {
+        return GetDriverStandingsUseCase(driverStandingsRepository)
     }
 }

@@ -5,13 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.ajinkya.formula1.common.log
-import com.ajinkya.formula1.common.toast
-import kotlin.reflect.KClass
 
 class RecyclerAdapter<Data : Any, VB : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB,
-    private val bind: VB.(Data, Int) -> Unit
+    private val bind: ViewHolder<VB>.(Data, ItemDetails) -> Unit
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder<VB>>() {
 
     var setClickListeners: (ViewHolder<VB>.(MutableList<Data>) -> Unit)? = null
@@ -26,7 +23,7 @@ class RecyclerAdapter<Data : Any, VB : ViewBinding>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder<VB>, position: Int) {
-        holder.binding.bind(itemList[position], position)
+        holder.bind(itemList[position], getItemDetails(position))
     }
 
     override fun getItemCount() = itemList.count()
@@ -36,21 +33,35 @@ class RecyclerAdapter<Data : Any, VB : ViewBinding>(
         val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
 
         this.itemList.clear()
-        this.itemList.addAll( itemList)
+        this.itemList.addAll(itemList)
         diffResult.dispatchUpdatesTo(this)
     }
+
+    private fun getItemDetails(position: Int) = ItemDetails(
+        size = itemList.size,
+        position = position,
+        isFirst = position == 0,
+        isLast = position == itemList.size - 1
+    )
 
     class ViewHolder<VB : ViewBinding>(val binding: VB) : RecyclerView.ViewHolder(binding.root)
 
 }
 
 
-internal fun <Data : Any, VB : ViewBinding> RecyclerView.withAdapter(
+fun <Data : Any, VB : ViewBinding> RecyclerView.withAdapter(
     bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> VB,
-    bind: VB.(Data, Int) -> Unit
+    bind: RecyclerAdapter.ViewHolder<VB>.(Data, ItemDetails) -> Unit
 ): RecyclerAdapter<Data, VB> {
     val recyclerAdapter = RecyclerAdapter(bindingInflater, bind)
     itemAnimator = null
     adapter = recyclerAdapter
     return recyclerAdapter
 }
+
+data class ItemDetails(
+    var size: Int,
+    var position: Int,
+    var isFirst: Boolean,
+    var isLast: Boolean
+)

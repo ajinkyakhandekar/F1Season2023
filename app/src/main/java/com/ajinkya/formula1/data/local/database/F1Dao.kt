@@ -1,11 +1,12 @@
 package com.ajinkya.formula1.data.local.database
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.ajinkya.formula1.data.local.entity.ConstructorEntity
 import com.ajinkya.formula1.data.local.entity.DriverEntity
 import com.ajinkya.formula1.data.local.entity.ScheduleEntity
-import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -24,9 +25,9 @@ interface F1Dao {
     suspend fun getSchedule(): List<ScheduleEntity>
 
     @Query("SELECT * FROM driver_table")
-    fun getDriverStandings(): LiveData<MutableList<DriverEntity>>
+    suspend fun getDriverStandings(): List<DriverEntity>
 
     @Query("SELECT * FROM constructor_table")
-    fun getConstructorStandings(): LiveData<MutableList<ConstructorEntity>>
+    suspend fun getConstructorStandings(): List<ConstructorEntity>
 
 }

@@ -4,67 +4,71 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.ajinkya.formula1.R
 import com.ajinkya.formula1.common.toast
-import com.ajinkya.formula1.data.remote.dto.DriverStanding
 import com.ajinkya.formula1.databinding.FragmentDriverBinding
 import com.ajinkya.formula1.databinding.RowRacesBinding
+import com.ajinkya.formula1.domain.model.Driver
 import com.ajinkya.formula1.ui.adapter.RecyclerAdapter
 import com.ajinkya.formula1.ui.adapter.withAdapter
-import com.ajinkya.formula1.ui.viewmodel.StandingsViewModel
-import com.ajinkya.formula1.ui.viewmodel.Status
+import com.ajinkya.formula1.ui.state.DriverStandingsState
+import com.ajinkya.formula1.ui.viewmodel.DriverStandingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DriverFragment : BaseFragment<FragmentDriverBinding>(
     FragmentDriverBinding::inflate
 ) {
 
-    private val standingsViewModel: StandingsViewModel by viewModels()
-    private lateinit var standingsAdapter: RecyclerAdapter<DriverStanding, RowRacesBinding>
+    private val driverStandingsViewModel: DriverStandingsViewModel by viewModels()
+    private lateinit var standingsAdapter: RecyclerAdapter<Driver, RowRacesBinding>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.includeTitle.apply {
-            textTitleLeft.text = "Position"
+            textTitleLeft.text = getString(R.string.position)
             textTitleCenter.text = "Driver/Constructor"
             textTitleRight.text = "Points"
         }
 
         setRecyclerView()
-        setLiveDataObservers()
+        //setObservers()
     }
 
     private fun setRecyclerView() {
         standingsAdapter = binding.recyclerSchedule.withAdapter(
             RowRacesBinding::inflate
-        ) { driverStanding, _ ->
-            textRound.text = driverStanding.position
-            textRace.text =
-                "${driverStanding.Driver.givenName} ${driverStanding.Driver.familyName}\n${driverStanding.Constructors[0].name}"
-            textDateTime.text = driverStanding.points
+        ) { driver, _ ->
+            val name = "${driver.driverName}\n${driver.constructorName}"
+
+            binding.textRound.text = driver.position
+            binding.textRace.text = name
+            binding.textDateTime.text = driver.points
         }
     }
 
-    private fun setLiveDataObservers() {
-        standingsViewModel.driverStandingsList.observe(this) { response ->
-            when (response.status) {
-                Status.LOADING -> {
-                    binding.progressBar.isVisible = true
-                }
-                Status.SUCCESS -> {
-                    binding.progressBar.isVisible = false
-                    binding.cardSchedule.isVisible = true
-                    response.data?.let {
-                        val driverList = it.MRData.StandingsTable.StandingsLists[0].DriverStandings
-                        standingsAdapter.updateData(driverList)
+    /*private fun setObservers() {
+        lifecycleScope.launchWhenStarted {
+            driverStandingsViewModel.uiState.collect { uiState ->
+                when (uiState) {
+                    is DriverStandingsState.Loading -> {
+                        binding.progressBar.isVisible = true
+                        standingsAdapter.updateData(uiState.drivers)
                     }
-                }
-                Status.ERROR -> {
-                    binding.progressBar.isVisible = false
-                    toast(response.error)
+                    is DriverStandingsState.Success -> {
+                        binding.progressBar.isVisible = false
+                        binding.cardSchedule.isVisible = true
+                        standingsAdapter.updateData(uiState.drivers)
+                    }
+                    is DriverStandingsState.Error -> {
+                        binding.progressBar.isVisible = false
+                        toast(uiState.error)
+                    }
                 }
             }
         }
-    }
+    }*/
 }
