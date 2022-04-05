@@ -3,17 +3,15 @@ package com.ajinkya.formula1.di
 import android.content.Context
 import androidx.room.Room
 import com.ajinkya.formula1.common.Constant
+import com.ajinkya.formula1.data.local.data_source.LocalDataSource
 import com.ajinkya.formula1.data.local.database.F1Dao
 import com.ajinkya.formula1.data.local.database.F1Database
-import com.ajinkya.formula1.data.local.data_source.LocalDataSource
 import com.ajinkya.formula1.data.remote.data_source.RemoteDataSource
 import com.ajinkya.formula1.data.remote.service.ApiService
 import com.ajinkya.formula1.data.repository.ConstructorStandingsRepository
 import com.ajinkya.formula1.data.repository.DriverStandingsRepository
 import com.ajinkya.formula1.data.repository.ScheduleRepository
-import com.ajinkya.formula1.domain.use_case.GetConstructorStandingsUseCase
-import com.ajinkya.formula1.domain.use_case.GetDriverStandingsUseCase
-import com.ajinkya.formula1.domain.use_case.GetScheduleUseCase
+import com.ajinkya.formula1.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,7 +56,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideDao(db: F1Database) : F1Dao = db.f1Dao()
+    fun provideDao(db: F1Database): F1Dao = db.f1Dao()
 
     @Provides
     @Singleton
@@ -98,8 +96,24 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideScheduleUseCase(scheduleRepository: ScheduleRepository): GetScheduleUseCase {
-        return GetScheduleUseCase(scheduleRepository)
+    fun provideFormatScheduleDateUseCase(): FormatScheduleDateUseCase {
+        return FormatScheduleDateUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFormatScheduleTimeUseCase(): FormatScheduleTimeUseCase {
+        return FormatScheduleTimeUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideScheduleUseCase(
+        scheduleRepository: ScheduleRepository,
+        formatScheduleDateUseCase: FormatScheduleDateUseCase,
+        formatScheduleTimeUseCase: FormatScheduleTimeUseCase
+    ): GetScheduleUseCase {
+        return GetScheduleUseCase(scheduleRepository, formatScheduleDateUseCase, formatScheduleTimeUseCase)
     }
 
     @Provides

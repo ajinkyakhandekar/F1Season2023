@@ -5,7 +5,7 @@ import com.ajinkya.formula1.data.local.data_source.LocalDataSource
 import com.ajinkya.formula1.data.remote.dto.mapDriver
 import com.ajinkya.formula1.data.remote.data_source.RemoteDataSource
 import com.ajinkya.formula1.domain.model.Driver
-import com.ajinkya.formula1.ui.viewmodel.ResponseStatus
+import com.ajinkya.formula1.common.ResponseStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

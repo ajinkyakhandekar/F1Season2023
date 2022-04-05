@@ -4,65 +4,62 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.ajinkya.formula1.R
+import com.ajinkya.formula1.common.ifNotEmpty
 import com.ajinkya.formula1.common.toast
-import com.ajinkya.formula1.data.remote.dto.ConstructorStanding
 import com.ajinkya.formula1.databinding.FragmentDriverBinding
 import com.ajinkya.formula1.databinding.RowRacesBinding
+import com.ajinkya.formula1.domain.model.Constructor
 import com.ajinkya.formula1.ui.adapter.RecyclerAdapter
 import com.ajinkya.formula1.ui.adapter.withAdapter
 import com.ajinkya.formula1.ui.viewmodel.ConstructorStandingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ConstructorFragment : BaseFragment<FragmentDriverBinding>(
     FragmentDriverBinding::inflate
 ) {
 
-    private val standingsViewModel: ConstructorStandingsViewModel by viewModels()
-    private lateinit var standingsAdapter: RecyclerAdapter<ConstructorStanding, RowRacesBinding>
+    private val constructorStandingsViewModel: ConstructorStandingsViewModel by viewModels()
+    private lateinit var standingsAdapter: RecyclerAdapter<Constructor, RowRacesBinding>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.includeTitle.apply {
-            textTitleLeft.text = "Position"
-            textTitleCenter.text = "Constructor"
-            textTitleRight.text = "Points"
+            textTitleLeft.text = getString(R.string.position)
+            textTitleCenter.text = getString(R.string.constructor_title)
+            textTitleRight.text = getString(R.string.points)
         }
 
         setRecyclerView()
-       // setLiveDataObservers()
+        setObservers()
     }
 
     private fun setRecyclerView() {
         standingsAdapter = binding.recyclerSchedule.withAdapter(
             RowRacesBinding::inflate
-        ) { constructorStanding, _ ->
-            binding.textRound.text = constructorStanding.position
-            binding.textRace.text = constructorStanding.Constructor.name
-            binding.textDateTime.text = constructorStanding.points
+        ) { constructor, _ ->
+            binding.textRound.text = constructor.position
+            binding.textRace.text = constructor.constructorName
+            binding.textDateTime.text = constructor.points
         }
     }
 
-    /*private fun setLiveDataObservers() {
-        standingsViewModel.constructorStandingsList.observe(this) { response ->
-            when (response.status) {
-                Status.LOADING -> {
-                    binding.progressBar.isVisible = true
-                }
-                Status.SUCCESS -> {
-                    binding.progressBar.isVisible = false
-                    binding.cardSchedule.isVisible = true
-                    response.data?.let {
-                        val constructorList = it.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
-                        standingsAdapter.updateData(constructorList)
-                    }
-                }
-                Status.ERROR -> {
-                    binding.progressBar.isVisible = false
-                    toast(response.error)
+    private fun setObservers() {
+        lifecycleScope.launchWhenStarted {
+            constructorStandingsViewModel.uiState.collect { uiState ->
+
+                binding.progressBar.isVisible = uiState.isLoading
+                binding.cardSchedule.isVisible = uiState.constructorList.isNotEmpty()
+                standingsAdapter.updateData(uiState.constructorList)
+
+                uiState.errorMessage.ifNotEmpty {
+                    toast(uiState.errorMessage)
                 }
             }
         }
-    }*/
+    }
 }

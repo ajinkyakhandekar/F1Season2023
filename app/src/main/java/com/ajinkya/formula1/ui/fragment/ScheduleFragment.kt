@@ -35,9 +35,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>(
             RowRacesBinding::inflate
         ) { schedule, itemDetails ->
             val raceName = "${schedule.raceName}\n${schedule.country}"
-            val date = convertDate(schedule.date)
-            val time = convertTime(schedule.time)
-            val dateTime = "$date\n$time"
+            val dateTime = "${schedule.date}\n${schedule.time}"
 
             binding.textRound.text = schedule.round
             binding.textRace.text = raceName

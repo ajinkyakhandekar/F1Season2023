@@ -3,6 +3,8 @@ package com.ajinkya.formula1.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajinkya.formula1.common.Constant
+import com.ajinkya.formula1.common.ResponseStatus
+import com.ajinkya.formula1.common.ifNull
 import com.ajinkya.formula1.domain.use_case.GetConstructorStandingsUseCase
 import com.ajinkya.formula1.ui.state.ConstructorStandingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,7 @@ class ConstructorStandingsViewModel @Inject constructor(
     private val getConstructorStandingsUseCase: GetConstructorStandingsUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<ConstructorStandingsState>(ConstructorStandingsState.Success(emptyList()))
+    private val _uiState = MutableStateFlow(ConstructorStandingsState())
     val uiState: StateFlow<ConstructorStandingsState> = _uiState
 
     init {
@@ -28,15 +30,23 @@ class ConstructorStandingsViewModel @Inject constructor(
         getConstructorStandingsUseCase().onEach { responseStatus ->
             when (responseStatus) {
                 is ResponseStatus.Loading -> {
-                    _uiState.value = ConstructorStandingsState.Loading(isLoading = true)
+                    _uiState.value = ConstructorStandingsState(
+                        true,
+                        responseStatus.data.orEmpty(),
+                    )
                 }
                 is ResponseStatus.Success -> {
-                    _uiState.value =
-                        ConstructorStandingsState.Success(constructors = responseStatus.data ?: emptyList())
+                    _uiState.value = ConstructorStandingsState(
+                        false,
+                        responseStatus.data.orEmpty(),
+                    )
                 }
                 is ResponseStatus.Error -> {
-                    _uiState.value =
-                        ConstructorStandingsState.Error(error = responseStatus.message ?: Constant.MSG_ERROR)
+                    _uiState.value = ConstructorStandingsState(
+                        false,
+                        responseStatus.data.orEmpty(),
+                        responseStatus.message.ifNull(Constant.MSG_ERROR)
+                    )
                 }
             }
         }.launchIn(viewModelScope)

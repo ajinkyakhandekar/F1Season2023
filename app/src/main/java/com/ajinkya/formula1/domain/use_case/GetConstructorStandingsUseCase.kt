@@ -2,7 +2,7 @@ package com.ajinkya.formula1.domain.use_case
 
 import com.ajinkya.formula1.data.repository.ConstructorStandingsRepository
 import com.ajinkya.formula1.domain.model.Constructor
-import com.ajinkya.formula1.ui.viewmodel.ResponseStatus
+import com.ajinkya.formula1.common.ResponseStatus
 import kotlinx.coroutines.flow.Flow
 
 class GetConstructorStandingsUseCase(

@@ -1,4 +1,4 @@
-package com.ajinkya.formula1.ui.viewmodel
+package com.ajinkya.formula1.common
 
 sealed class ResponseStatus<T>(val data: T? = null, val message: String? = null) {
 

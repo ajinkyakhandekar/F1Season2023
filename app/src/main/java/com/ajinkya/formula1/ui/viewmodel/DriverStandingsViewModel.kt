@@ -3,6 +3,8 @@ package com.ajinkya.formula1.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajinkya.formula1.common.Constant
+import com.ajinkya.formula1.common.ResponseStatus
+import com.ajinkya.formula1.common.ifNull
 import com.ajinkya.formula1.domain.use_case.GetDriverStandingsUseCase
 import com.ajinkya.formula1.ui.state.DriverStandingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,7 @@ class DriverStandingsViewModel @Inject constructor(
     private val getDriverStandingsUseCase: GetDriverStandingsUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<DriverStandingsState>(DriverStandingsState.Success(emptyList()))
+    private val _uiState = MutableStateFlow(DriverStandingsState())
     val uiState: StateFlow<DriverStandingsState> = _uiState
 
     init {
@@ -28,13 +30,23 @@ class DriverStandingsViewModel @Inject constructor(
         getDriverStandingsUseCase().onEach { responseStatus ->
             when (responseStatus) {
                 is ResponseStatus.Loading -> {
-                    _uiState.value = DriverStandingsState.Loading(isLoading = true)
+                    _uiState.value = DriverStandingsState(
+                        true,
+                        responseStatus.data.orEmpty(),
+                    )
                 }
                 is ResponseStatus.Success -> {
-                    _uiState.value = DriverStandingsState.Success(drivers = responseStatus.data ?: emptyList())
+                    _uiState.value = DriverStandingsState(
+                        false,
+                        responseStatus.data.orEmpty(),
+                    )
                 }
                 is ResponseStatus.Error -> {
-                    _uiState.value = DriverStandingsState.Error(error = responseStatus.message ?: Constant.MSG_ERROR)
+                    _uiState.value = DriverStandingsState(
+                        false,
+                        responseStatus.data.orEmpty(),
+                        responseStatus.message.ifNull(Constant.MSG_ERROR)
+                    )
                 }
             }
         }.launchIn(viewModelScope)

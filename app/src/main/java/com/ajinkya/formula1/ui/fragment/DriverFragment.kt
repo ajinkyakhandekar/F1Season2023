@@ -6,13 +6,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.ajinkya.formula1.R
+import com.ajinkya.formula1.common.ifNotEmpty
 import com.ajinkya.formula1.common.toast
 import com.ajinkya.formula1.databinding.FragmentDriverBinding
 import com.ajinkya.formula1.databinding.RowRacesBinding
 import com.ajinkya.formula1.domain.model.Driver
 import com.ajinkya.formula1.ui.adapter.RecyclerAdapter
 import com.ajinkya.formula1.ui.adapter.withAdapter
-import com.ajinkya.formula1.ui.state.DriverStandingsState
 import com.ajinkya.formula1.ui.viewmodel.DriverStandingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -30,12 +30,12 @@ class DriverFragment : BaseFragment<FragmentDriverBinding>(
 
         binding.includeTitle.apply {
             textTitleLeft.text = getString(R.string.position)
-            textTitleCenter.text = "Driver/Constructor"
-            textTitleRight.text = "Points"
+            textTitleCenter.text = getString(R.string.driver_title)
+            textTitleRight.text = getString(R.string.points)
         }
 
         setRecyclerView()
-        //setObservers()
+        setObservers()
     }
 
     private fun setRecyclerView() {
@@ -50,25 +50,18 @@ class DriverFragment : BaseFragment<FragmentDriverBinding>(
         }
     }
 
-    /*private fun setObservers() {
+    private fun setObservers() {
         lifecycleScope.launchWhenStarted {
             driverStandingsViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is DriverStandingsState.Loading -> {
-                        binding.progressBar.isVisible = true
-                        standingsAdapter.updateData(uiState.drivers)
-                    }
-                    is DriverStandingsState.Success -> {
-                        binding.progressBar.isVisible = false
-                        binding.cardSchedule.isVisible = true
-                        standingsAdapter.updateData(uiState.drivers)
-                    }
-                    is DriverStandingsState.Error -> {
-                        binding.progressBar.isVisible = false
-                        toast(uiState.error)
-                    }
+
+                binding.progressBar.isVisible = uiState.isLoading
+                binding.cardSchedule.isVisible = uiState.driverList.isNotEmpty()
+                standingsAdapter.updateData(uiState.driverList)
+
+                uiState.errorMessage.ifNotEmpty {
+                    toast(uiState.errorMessage)
                 }
             }
         }
-    }*/
+    }
 }

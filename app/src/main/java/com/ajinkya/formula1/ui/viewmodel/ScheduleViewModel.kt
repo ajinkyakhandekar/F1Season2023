@@ -3,6 +3,7 @@ package com.ajinkya.formula1.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajinkya.formula1.common.Constant
+import com.ajinkya.formula1.common.ResponseStatus
 import com.ajinkya.formula1.common.ifNull
 import com.ajinkya.formula1.domain.use_case.GetScheduleUseCase
 import com.ajinkya.formula1.ui.state.ScheduleState
@@ -31,13 +32,13 @@ class ScheduleViewModel @Inject constructor(
                 is ResponseStatus.Loading -> {
                     _uiState.value = ScheduleState(
                         true,
-                        responseStatus.data ?: emptyList(),
+                        responseStatus.data.orEmpty(),
                     )
                 }
                 is ResponseStatus.Success -> {
                     _uiState.value = ScheduleState(
                         false,
-                        responseStatus.data ?: emptyList(),
+                        responseStatus.data.orEmpty(),
                     )
                 }
                 is ResponseStatus.Error -> {

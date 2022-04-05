@@ -4,4 +4,7 @@
     <string name="title_driver">Driver Standings</string>
     <string name="title_constructor">Constructor Standings</string>
     <string name="position">Position</string>
+    <string name="driver_title">Driver/Constructor</string>
+    <string name="points">Points</string>
+    <string name="constructor_title">Constructor</string>
 </resources>
