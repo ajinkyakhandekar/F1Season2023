@@ -2,8 +2,6 @@ package com.ajinkya.formula1.ui.activity
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ajinkya.formula1.R
 import com.ajinkya.formula1.databinding.ActivityBottomNavigationBinding
@@ -21,5 +19,9 @@ class BottomNavigationActivity : BaseActivity<ActivityBottomNavigationBinding>(
         val navController = findNavController(R.id.nav_host_fragment_activity_bottom_navigation)
 
         binding.navView.setupWithNavController(navController)
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 }

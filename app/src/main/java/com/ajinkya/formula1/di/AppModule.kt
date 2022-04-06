@@ -27,6 +27,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    // ----------------- Remote Data Source -------------------- //
     @Singleton
     @Provides
     fun provideRetrofit(): Retrofit {
@@ -45,6 +46,13 @@ object AppModule {
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
 
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(apiService: ApiService) = RemoteDataSource(apiService)
+
+
+    // ----------------- Local Data Source -------------------- //
+
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
@@ -60,51 +68,43 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalDataSource(f1Dao: F1Dao): LocalDataSource {
-        return LocalDataSource(f1Dao)
-    }
+    fun provideLocalDataSource(f1Dao: F1Dao) = LocalDataSource(f1Dao)
 
-    @Provides
-    @Singleton
-    fun provideRemoteDataSource(apiService: ApiService): RemoteDataSource {
-        return RemoteDataSource(apiService)
-    }
+
+    // ----------------- Repository -------------------- //
 
     @Provides
     @Singleton
     fun provideScheduleRepository(
         localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource
-    ): ScheduleRepository {
-        return ScheduleRepository(localDataSource, remoteDataSource)
-    }
+    ) = ScheduleRepository(localDataSource, remoteDataSource)
+
 
     @Provides
     @Singleton
     fun provideDriverStandingsRepository(
         localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource
-    ): DriverStandingsRepository {
-        return DriverStandingsRepository(localDataSource, remoteDataSource)
-    }
+    ) = DriverStandingsRepository(localDataSource, remoteDataSource)
+
 
     @Provides
     @Singleton
     fun provideConstructorStandingsRepository(
         localDataSource: LocalDataSource, remoteDataSource: RemoteDataSource
-    ): ConstructorStandingsRepository {
-        return ConstructorStandingsRepository(localDataSource, remoteDataSource)
-    }
+    ) = ConstructorStandingsRepository(localDataSource, remoteDataSource)
+
+
+    // ----------------- Use Cases -------------------- //
 
     @Provides
     @Singleton
-    fun provideFormatScheduleDateUseCase(): FormatScheduleDateUseCase {
-        return FormatScheduleDateUseCase()
-    }
+    fun provideFormatScheduleDateUseCase() = FormatScheduleDateUseCase()
+
 
     @Provides
     @Singleton
-    fun provideFormatScheduleTimeUseCase(): FormatScheduleTimeUseCase {
-        return FormatScheduleTimeUseCase()
-    }
+    fun provideFormatScheduleTimeUseCase() = FormatScheduleTimeUseCase()
+
 
     @Provides
     @Singleton
@@ -112,19 +112,18 @@ object AppModule {
         scheduleRepository: ScheduleRepository,
         formatScheduleDateUseCase: FormatScheduleDateUseCase,
         formatScheduleTimeUseCase: FormatScheduleTimeUseCase
-    ): GetScheduleUseCase {
-        return GetScheduleUseCase(scheduleRepository, formatScheduleDateUseCase, formatScheduleTimeUseCase)
-    }
+    ) = GetScheduleUseCase(scheduleRepository, formatScheduleDateUseCase, formatScheduleTimeUseCase)
+
 
     @Provides
     @Singleton
-    fun provideConstructorStandingsUseCase(constructorStandingsRepository: ConstructorStandingsRepository): GetConstructorStandingsUseCase {
-        return GetConstructorStandingsUseCase(constructorStandingsRepository)
-    }
+    fun provideConstructorStandingsUseCase(constructorStandingsRepository: ConstructorStandingsRepository) =
+        GetConstructorStandingsUseCase(constructorStandingsRepository)
+
 
     @Provides
     @Singleton
-    fun provideDriverStandingsUseCase(driverStandingsRepository: DriverStandingsRepository): GetDriverStandingsUseCase {
-        return GetDriverStandingsUseCase(driverStandingsRepository)
-    }
+    fun provideDriverStandingsUseCase(driverStandingsRepository: DriverStandingsRepository) =
+        GetDriverStandingsUseCase(driverStandingsRepository)
+
 }
