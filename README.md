@@ -1,17 +1,17 @@
-# **Formula1 Season 2022**
+# **Formula1 Season 2023**
 
-This repository contains android app that showcases Schedule for Formula 1 - 2022 Season starting on 20 March 2022.
+This repository contains android app that showcases Schedule and Driver & Constructor Standings for Formula 1 - 2023 Season.
 
 ### **Data/Api Provider:**
 Ergast Developer API,  
-Url: https://ergast.com/api/f1/2022.json
+Url: https://ergast.com/api/f1/2023.json
 
 
 ### **Components Used**
 
 1. Api Service - Retrofit
 2. Dependency Injection – Dagger-Hilt
-3. Concurrency - Kotlin Coroutines & LiveData
+3. Concurrency - Kotlin Coroutines & Flow
 
 ### **Architecture**
 
