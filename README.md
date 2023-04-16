@@ -21,7 +21,7 @@ The architecture used is MVVM. The project structure is defined as below:
 ![alt text](https://github.com/ajinkyakhandekar/F1Season2022/blob/main/android_arch.PNG)
 
 
-### **Screenshot**
+### **Screenshots**
 
 
-<img src="https://github.com/ajinkyakhandekar/F1Season2022/blob/main/Screenshot_20220316-184709.jpg" width="250">
+<img src="https://github.com/ajinkyakhandekar/F1Season2022/blob/main/Screenshot_1.jpg" width="250">    <img src="https://github.com/ajinkyakhandekar/F1Season2022/blob/main/Screenshot_2.jpg" width="250">    <img src="https://github.com/ajinkyakhandekar/F1Season2022/blob/main/Screenshot_3.jpg" width="250">
