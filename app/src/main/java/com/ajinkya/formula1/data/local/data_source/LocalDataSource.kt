@@ -1,29 +1,29 @@
 package com.ajinkya.formula1.data.local.data_source
 
 import com.ajinkya.formula1.data.local.database.F1Dao
-import com.ajinkya.formula1.data.local.entity.ConstructorEntity
-import com.ajinkya.formula1.data.local.entity.DriverEntity
-import com.ajinkya.formula1.data.local.entity.ScheduleEntity
+import com.ajinkya.formula1.data.local.entity.Constructor
+import com.ajinkya.formula1.data.local.entity.Driver
+import com.ajinkya.formula1.data.local.entity.Schedule
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val f1Dao: F1Dao
 ) {
 
-    suspend fun insertSchedule(scheduleEntityList: List<ScheduleEntity>) =
-        f1Dao.insertSchedule(scheduleEntityList)
+    suspend fun insertSchedule(scheduleList: List<Schedule>) =
+        f1Dao.insertSchedule(scheduleList)
 
-    suspend fun insertDriverStandings(driverEntityList: List<DriverEntity>) =
-        f1Dao.insertDriver(driverEntityList)
+    suspend fun insertDrivers(driverList: List<Driver>) =
+        f1Dao.insertDrivers(driverList)
 
-    suspend fun insertConstructorStandings(constructorEntityList: List<ConstructorEntity>) =
-        f1Dao.insertConstructor(constructorEntityList)
+    suspend fun insertConstructors(constructorList: List<Constructor>) =
+        f1Dao.insertConstructors(constructorList)
 
 
-    suspend fun getSchedule() = f1Dao.getSchedule()
+    fun getSchedule() = f1Dao.getSchedule()
 
-    suspend fun getDriverStandings() = f1Dao.getDriverStandings()
+    fun getDrivers() = f1Dao.getDrivers()
 
-    suspend fun getConstructorStandings() = f1Dao.getConstructorStandings()
+    fun getConstructors() = f1Dao.getConstructors()
 
 }

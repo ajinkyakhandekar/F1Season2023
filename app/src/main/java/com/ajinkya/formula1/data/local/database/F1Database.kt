@@ -2,12 +2,12 @@ package com.ajinkya.formula1.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.ajinkya.formula1.data.local.entity.ConstructorEntity
-import com.ajinkya.formula1.data.local.entity.DriverEntity
-import com.ajinkya.formula1.data.local.entity.ScheduleEntity
+import com.ajinkya.formula1.data.local.entity.Constructor
+import com.ajinkya.formula1.data.local.entity.Driver
+import com.ajinkya.formula1.data.local.entity.Schedule
 
 @Database(
-    entities = [ScheduleEntity::class, DriverEntity::class, ConstructorEntity::class],
+    entities = [Schedule::class, Driver::class, Constructor::class],
     version = 1,
     exportSchema = false
 )

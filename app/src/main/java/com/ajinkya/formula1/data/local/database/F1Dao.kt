@@ -4,30 +4,30 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.ajinkya.formula1.data.local.entity.ConstructorEntity
-import com.ajinkya.formula1.data.local.entity.DriverEntity
-import com.ajinkya.formula1.data.local.entity.ScheduleEntity
-
+import com.ajinkya.formula1.data.local.entity.Constructor
+import com.ajinkya.formula1.data.local.entity.Driver
+import com.ajinkya.formula1.data.local.entity.Schedule
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface F1Dao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSchedule(scheduleEntityList: List<ScheduleEntity>)
+    suspend fun insertSchedule(scheduleList: List<Schedule>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDriver(driverEntityList: List<DriverEntity>)
+    suspend fun insertDrivers(driverList: List<Driver>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertConstructor(constructorEntityList: List<ConstructorEntity>)
+    suspend fun insertConstructors(constructorList: List<Constructor>)
 
     @Query("SELECT * FROM schedule_table")
-    suspend fun getSchedule(): List<ScheduleEntity>
+    fun getSchedule(): Flow<List<Schedule>>
 
     @Query("SELECT * FROM driver_table")
-    suspend fun getDriverStandings(): List<DriverEntity>
+    fun getDrivers(): Flow<List<Driver>>
 
     @Query("SELECT * FROM constructor_table")
-    suspend fun getConstructorStandings(): List<ConstructorEntity>
+    fun getConstructors(): Flow<List<Constructor>>
 
 }
