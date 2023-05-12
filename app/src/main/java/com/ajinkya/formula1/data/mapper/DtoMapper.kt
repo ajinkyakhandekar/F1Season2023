@@ -24,12 +24,12 @@ fun StandingsDto.mapDriver(): List<Driver> {
     if (MRData.StandingsTable.StandingsLists.isEmpty()) return emptyList()
 
     return MRData.StandingsTable.StandingsLists[0].DriverStandings.map {
-        Driver().apply {
-            position = it.position
-            points = it.points
-            driverName = "${it.Driver.givenName} ${it.Driver.familyName}"
+        Driver(
+            position = it.position,
+            points = it.points,
+            driverName = "${it.Driver.givenName} ${it.Driver.familyName}",
             constructorName = if (it.Constructors.isEmpty()) "" else it.Constructors[0].name
-        }
+        )
     }
 }
 

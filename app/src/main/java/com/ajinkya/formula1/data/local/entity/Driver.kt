@@ -7,8 +7,8 @@ import com.ajinkya.formula1.common.Constant
 @Entity(tableName = Constant.DRIVER_TABLE)
 data class Driver(
     @PrimaryKey
-    var position: String = "",
-    var points: String = "",
-    var constructorName: String = "",
-    var driverName: String = "",
+    val position: String,
+    val points: String,
+    val constructorName: String,
+    val driverName: String,
 )

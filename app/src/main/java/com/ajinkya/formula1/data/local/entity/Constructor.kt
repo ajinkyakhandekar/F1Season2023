@@ -7,7 +7,7 @@ import com.ajinkya.formula1.common.Constant
 @Entity(tableName = Constant.CONSTRUCTOR_TABLE)
 data class Constructor(
     @PrimaryKey
-    var position: String = "",
-    var points: String = "",
-    var constructorName: String = ""
+    val position: String,
+    val points: String,
+    val constructorName: String,
 )
