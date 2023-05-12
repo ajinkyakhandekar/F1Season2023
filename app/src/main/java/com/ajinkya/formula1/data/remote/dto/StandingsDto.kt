@@ -1,62 +1,62 @@
 package com.ajinkya.formula1.data.remote.dto
 
 data class StandingsDto(
-    var MRData: MRDataStandings = MRDataStandings()
+    val MRData: MRDataStandings
 )
 
 data class MRDataStandings(
-    var StandingsTable: StandingsTable = StandingsTable(),
-    var limit: String = "",
-    var offset: String = "",
-    var series: String = "",
-    var total: String = "",
-    var url: String = "",
-    var xmlns: String = ""
+    val StandingsTable: StandingsTable,
+    val limit: String,
+    val offset: String,
+    val series: String,
+    val total: String,
+    val url: String,
+    val xmlns: String
 )
 
 data class StandingsTable(
-    var StandingsLists: MutableList<StandingsLists> = mutableListOf(),
-    var season: String = ""
+    val StandingsLists: List<StandingsLists>,
+    val season: String
 )
 
 data class StandingsLists(
-    var DriverStandings: MutableList<DriverStanding> = mutableListOf(),
-    var ConstructorStandings: MutableList<ConstructorStanding> = mutableListOf(),
-    var round: String = "",
-    var season: String = ""
+    val DriverStandings: List<DriverStanding>,
+    val ConstructorStandings: List<ConstructorStanding>,
+    val round: String,
+    val season: String
 )
 
 data class DriverStanding(
-    var Constructors: MutableList<ConstructorDto> = mutableListOf(),
-    var Driver: DriverDto = DriverDto(),
-    var points: String = "",
-    var position: String = "",
-    var positionText: String = "",
-    var wins: String = ""
+    val Constructors: List<ConstructorDto>,
+    val Driver: DriverDto,
+    val points: String,
+    val position: String,
+    val positionText: String,
+    val wins: String
 )
 
 data class ConstructorStanding(
-    var Constructor: ConstructorDto = ConstructorDto(),
-    var points: String = "",
-    var position: String = "",
-    var positionText: String = "",
-    var wins: String = ""
+    val Constructor: ConstructorDto,
+    val points: String,
+    val position: String,
+    val positionText: String,
+    val wins: String
 )
 
 data class ConstructorDto(
-    var constructorId: String = "",
-    var name: String = "",
-    var nationality: String = "",
-    var url: String = ""
+    val constructorId: String,
+    val name: String,
+    val nationality: String,
+    val url: String
 )
 
 data class DriverDto(
-    var code: String = "",
-    var dateOfBirth: String = "",
-    var driverId: String = "",
-    var familyName: String = "",
-    var givenName: String = "",
-    var nationality: String = "",
-    var permanentNumber: String = "",
-    var url: String = ""
+    val code: String,
+    val dateOfBirth: String,
+    val driverId: String,
+    val familyName: String,
+    val givenName: String,
+    val nationality: String,
+    val permanentNumber: String,
+    val url: String
 )

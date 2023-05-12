@@ -2,74 +2,74 @@ package com.ajinkya.formula1.data.remote.dto
 
 
 data class ScheduleDto(
-    var MRData: MRData = MRData()
+    val MRData: MRData
 )
 
 data class MRData(
-    var RaceTable: RaceTable = RaceTable(),
-    var limit: String = "",
-    var offset: String = "",
-    var series: String = "",
-    var total: String = "",
-    var url: String = "",
-    var xmlns: String = ""
+    val RaceTable: RaceTable,
+    val limit: String,
+    val offset: String,
+    val series: String,
+    val total: String,
+    val url: String,
+    val xmlns: String
 )
 
 data class RaceTable(
-    var Races: MutableList<Race> = mutableListOf(),
-    var season: String = ""
+    val Races: List<Race>,
+    val season: String
 )
 
 data class Race(
-    var Circuit: Circuit = Circuit(),
-    var FirstPractice: FirstPractice = FirstPractice(),
-    var Qualifying: Qualifying = Qualifying(),
-    var SecondPractice: SecondPractice = SecondPractice(),
-    var Sprint: Sprint = Sprint(),
-    var ThirdPractice: ThirdPractice = ThirdPractice(),
-    var date: String = "",
-    var raceName: String = "",
-    var round: String = "",
-    var season: String = "",
-    var time: String = "",
-    var url: String = ""
+    val Circuit: Circuit,
+    val FirstPractice: FirstPractice,
+    val Qualifying: Qualifying,
+    val SecondPractice: SecondPractice,
+    val Sprint: Sprint,
+    val ThirdPractice: ThirdPractice,
+    val date: String,
+    val raceName: String,
+    val round: String,
+    val season: String,
+    val time: String,
+    val url: String
 )
 
 data class Circuit(
-    var Location: Location = Location(),
-    var circuitId: String = "",
-    var circuitName: String = "",
-    var url: String = ""
+    val Location: Location,
+    val circuitId: String,
+    val circuitName: String,
+    val url: String
 )
 
 data class FirstPractice(
-    var date: String = "",
-    var time: String = ""
+    val date: String,
+    val time: String
 )
 
 data class Qualifying(
-    var date: String = "",
-    var time: String = ""
+    val date: String,
+    val time: String
 )
 
 data class SecondPractice(
-    var date: String = "",
-    var time: String = ""
+    val date: String,
+    val time: String
 )
 
 data class Sprint(
-    var date: String = "",
-    var time: String = ""
+    val date: String,
+    val time: String
 )
 
 data class ThirdPractice(
-    var date: String = "",
-    var time: String = ""
+    val date: String,
+    val time: String
 )
 
 data class Location(
-    var country: String = "",
-    var lat: String = "",
-    var locality: String = "",
-    var long: String = ""
+    val country: String,
+    val lat: String,
+    val locality: String,
+    val long: String
 )
