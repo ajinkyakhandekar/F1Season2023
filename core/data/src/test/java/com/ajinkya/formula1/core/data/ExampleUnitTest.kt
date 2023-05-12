@@ -1,4 +1,4 @@
-package com.ajinkya.formula1
+package com.ajinkya.formula1.core.data
 
 import org.junit.Test
 

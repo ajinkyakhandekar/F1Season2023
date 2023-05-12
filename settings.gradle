@@ -8,3 +8,11 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Formula1-2022"
 include ':app'
+include ':core:data'
+include ':core:database'
+include ':core:model'
+include ':core:common'
+include ':feature:driver'
+include ':feature:schedule'
+include ':feature:constructor'
+include ':core:designsystem'
