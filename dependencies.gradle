@@ -36,4 +36,10 @@ ext {
 
     // gson
     gsonVersion = "2.9.0"
+
+    // testing
+    androidJunitVersion = "1.1.5"
+    coreTestingVersion = "2.2.0"
+    truthVersion = "1.1.3"
+    turbineVersion = "0.12.3"
 }

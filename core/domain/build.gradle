@@ -42,4 +42,8 @@ dependencies {
     //dagger-hilt
     implementation "com.google.dagger:hilt-android:$hiltAndroid"
     kapt "com.google.dagger:hilt-compiler:$hiltCompiler"
+
+    //test
+    testImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
 }

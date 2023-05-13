@@ -5,10 +5,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.cash.turbine.test
-import com.ajinkya.formula1.data.local.database.F1Dao
-import com.ajinkya.formula1.data.local.database.F1Database
-import com.ajinkya.formula1.data.local.entity.Driver
-import com.ajinkya.formula1.data.local.entity.Schedule
+import com.ajinkya.formula1.core.database.entity.DriverEntity
+import com.ajinkya.formula1.core.database.entity.ScheduleEntity
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -70,14 +68,14 @@ class F1DaoTest {
 }
 
 val givenSchedule = listOf(
-    Schedule(
+    ScheduleEntity(
         round = "1",
         raceName = "Silverstone",
         country = "UK",
         date = "2023-02-12",
         time = "18:45:00+0000",
     ),
-    Schedule(
+    ScheduleEntity(
         round = "2",
         raceName = "Imola",
         country = "Italy",
@@ -88,13 +86,13 @@ val givenSchedule = listOf(
 
 
 val givenDrivers = listOf(
-    Driver(
+    DriverEntity(
         position = "1",
         points = "23",
         constructorName = "Ferrari",
         driverName = "Carlos"
     ),
-    Driver(
+    DriverEntity(
         position = "2",
         points = "46",
         constructorName = "Mercedes",

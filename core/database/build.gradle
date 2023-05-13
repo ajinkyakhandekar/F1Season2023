@@ -49,4 +49,11 @@ dependencies {
     //dagger-hilt
     implementation "com.google.dagger:hilt-android:$hiltAndroid"
     kapt "com.google.dagger:hilt-compiler:$hiltCompiler"
+
+    //tests
+    androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    androidTestImplementation "com.google.truth:truth:$truthVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion"
+    androidTestImplementation "app.cash.turbine:turbine:$turbineVersion"
 }
