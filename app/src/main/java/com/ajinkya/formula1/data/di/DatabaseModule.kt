@@ -2,7 +2,7 @@ package com.ajinkya.formula1.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ajinkya.formula1.common.Constant
+import com.ajinkya.formula1.core.common.Constant
 import com.ajinkya.formula1.data.local.database.F1Dao
 import com.ajinkya.formula1.data.local.database.F1Database
 import dagger.Module
@@ -24,7 +24,7 @@ object DatabaseModule {
     ) = Room.databaseBuilder(
         context,
         F1Database::class.java,
-        Constant.F1_DATABASE
+        com.ajinkya.formula1.core.common.Constant.F1_DATABASE
     ).build()
 
 

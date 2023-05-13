@@ -1,6 +1,6 @@
 package com.ajinkya.formula1.data.di
 
-import com.ajinkya.formula1.common.Constant
+import com.ajinkya.formula1.core.common.Constant
 import com.ajinkya.formula1.data.remote.service.ApiService
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(): Retrofit {
         val retrofit = Retrofit.Builder()
-            .baseUrl(Constant.BASE_URL)
+            .baseUrl(com.ajinkya.formula1.core.common.Constant.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
 
         val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

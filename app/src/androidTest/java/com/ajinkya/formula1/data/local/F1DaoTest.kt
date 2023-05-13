@@ -19,13 +19,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * RunWith - Declare the testing library with we want to Test
- * @get:Rule -
- * instantTaskExecutorRule -
- *
- * Before - Call this function before every Test
- * After - Call this function after every Test
- *
  * inMemoryDatabaseBuilder - Hold the database in RAM, do not create an actual database
  * allowMainThreadQueries - Disables Main thread query check
  *
@@ -59,8 +52,7 @@ class F1DaoTest {
 
     @Test
     fun insertSchedule() = runTest {
-        val scheduleList = listOf(Schedule(round = "1"), Schedule(round = "2"))
-        f1Dao.insertSchedule(scheduleList)
+        f1Dao.insertSchedule(givenSchedule)
 
         f1Dao.getSchedule().test {
             assertThat(awaitItem().size).isEqualTo(2)
@@ -69,11 +61,43 @@ class F1DaoTest {
 
     @Test
     fun insertDriver() = runTest {
-        val driverList = listOf(Driver(position = "1"), Driver(position = "2"))
-        f1Dao.insertDrivers(driverList)
+        f1Dao.insertDrivers(givenDrivers)
 
-        f1Dao.getSchedule().test {
+        f1Dao.getDrivers().test {
             assertThat(awaitItem().size).isEqualTo(2)
         }
     }
 }
+
+val givenSchedule = listOf(
+    Schedule(
+        round = "1",
+        raceName = "Silverstone",
+        country = "UK",
+        date = "2023-02-12",
+        time = "18:45:00+0000",
+    ),
+    Schedule(
+        round = "2",
+        raceName = "Imola",
+        country = "Italy",
+        date = "2023-07-22",
+        time = "11:30:00+0000",
+    )
+)
+
+
+val givenDrivers = listOf(
+    Driver(
+        position = "1",
+        points = "23",
+        constructorName = "Ferrari",
+        driverName = "Carlos"
+    ),
+    Driver(
+        position = "2",
+        points = "46",
+        constructorName = "Mercedes",
+        driverName = "Max"
+    )
+)

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'io.gitlab.arturbosch.detekt'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -42,7 +43,7 @@ android {
         jvmTarget = '1.8'
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.3'
+        kotlinCompilerExtensionVersion '1.4.6'
     }
     packagingOptions {
         resources {
@@ -64,6 +65,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.core:core-ktx:+'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     // viewModel coroutines
     kapt "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"

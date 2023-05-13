@@ -1,9 +1,9 @@
 package com.ajinkya.formula1.domain.use_case
 
-import com.ajinkya.formula1.common.Constant.DISPLAY_DATE_FORMAT
-import com.ajinkya.formula1.common.Constant.DISPLAY_TIME_FORMAT
-import com.ajinkya.formula1.common.Constant.REMOTE_DATE_FORMAT
-import com.ajinkya.formula1.common.Constant.REMOTE_TIME_FORMAT
+import com.ajinkya.formula1.core.common.Constant.DISPLAY_DATE_FORMAT
+import com.ajinkya.formula1.core.common.Constant.DISPLAY_TIME_FORMAT
+import com.ajinkya.formula1.core.common.Constant.REMOTE_DATE_FORMAT
+import com.ajinkya.formula1.core.common.Constant.REMOTE_TIME_FORMAT
 import com.ajinkya.formula1.data.local.entity.Schedule
 import com.ajinkya.formula1.data.repository.ScheduleRepository
 import kotlinx.coroutines.flow.Flow

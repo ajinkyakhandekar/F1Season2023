@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/drawable/c3_bg_bottom_dialog.xml" value="0.121" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/layout/bottom_sheet_parent.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/layout/c3_bottom_sheet_parent_full_screen.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/layout/fragment_driver.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/layout/row_races.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.17552083333333332" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula12022/app/src/main/res/layout/activity_schedule.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula12022/app/src/main/res/layout/row_heading.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula12022/app/src/main/res/layout/row_race_title.xml" value="0.1796875" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/Formula12022/app/src/main/res/layout/row_races.xml" value="0.22" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/drawable/f1_icon.xml" value="0.1287037037037037" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/drawable/racing_helmet.xml" value="0.1287037037037037" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.1" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/fragment_base.xml" value="0.1796875" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/fragment_driver.xml" value="0.1796875" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/fragment_schedule.xml" value="0.1796875" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/row_race_title.xml" value="0.1796875" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/layout/row_races.xml" value="0.1" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19427083333333334" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/Jyoti/Documents/Ajinkya/android apps/GitLab Projects/F1s2022/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.19583333333333333" />
-      </map>
-    </option>
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
