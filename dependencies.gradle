@@ -1,56 +1,39 @@
 ext {
+
     // Android
-    androidBuildToolsVersion = "7.2.1"
+    androidBuildToolsVersion = "7.2.2"
 
-    minVersion = 24
-    targetVersion = 32
-    compileVersion = 32
-
-    // kotlin
-    kotlinVersion = "1.6.10"
-    kotlinSerialization = "1.4.1"
+    // plugin
+    kotlinPluginVersion = "1.8.20"
+    hiltPluginVersion = "2.43.2"
 
     // compose
-    composeVersion = '1.1.1'
-    composeWebView = "0.24.13-rc"
+    composeVersion = "1.4.0"
+    composeActivity = "1.7.0"
+    composeViewmodel = "2.6.1"
+    composeNavigation = "2.6.0-alpha08"
 
     // androidx
-    appcompatVersion = "1.5.0"
-    coreKtxVersion = "1.8.0"
-    activityKtxVersion = "1.5.1"
-    fragmentKtxVersion = "1.5.2"
-    lifecycleVersion = "2.6.0-alpha01"
-    constraintLayoutVersion = "2.1.4"
-    recyclerViewVersion = "1.2.1"
-    viewPagerVersion = "1.0.0"
+    appcompatVersion = "1.6.1"
+    coreKtxVersion = "1.9.0"
+    materialVersion = "1.8.0"
+    material3Version = "1.1.0-beta01"
 
-    // di
-    hiltVersion = "2.39.1"
+    // coroutines
+    coroutinesCoreVersion = "1.6.0"
 
-    // kotlin & coroutine
-    kotlinVersion = "1.6.10"
-    coroutineVersion = "1.5.2"
+    // hilt
+    hiltNavigationCompose = "1.0.0"
+    hiltAndroid = "2.43"
+    hiltCompiler = "2.43.2"
 
-    // material
-    materialVersion = "1.6.1"
+    // room
+    roomVersion = "2.5.1"
 
-    // network
+    // retrofit
     retrofitVersion = "2.9.0"
+    loggingInterceptorVersion = "4.9.3"
 
-    // OkHttp
-    okhttpInterceptorVerison = "4.9.3"
-
-    // serialization
-    moshiVersion = "1.13.0"
-
-    // Navigation
-    navVersion = "2.4.2"
-
-    // Test
-    junit4Version = "4.13.2"
-    turbine = "app.cash.turbine:turbine:0.12.0"
-    espresso = "androidx.test.espresso:espresso-core:3.1.0"
-    composeJunitTest = "androidx.compose.ui:ui-test-junit4:$composeVersion"
-    composeManifestTest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
-    hiltTest = "com.google.dagger:hilt-android-testing:$hiltVersion"
+    // gson
+    gsonVersion = "2.9.0"
 }

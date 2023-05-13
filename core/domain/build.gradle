@@ -35,7 +35,11 @@ android {
 
 dependencies {
 
+    implementation(project(":core:common"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+
     //dagger-hilt
-    implementation 'com.google.dagger:hilt-android:2.43'
-    kapt 'com.google.dagger:hilt-compiler:2.43.2'
+    implementation "com.google.dagger:hilt-android:$hiltAndroid"
+    kapt "com.google.dagger:hilt-compiler:$hiltCompiler"
 }

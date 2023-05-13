@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'io.gitlab.arturbosch.detekt'
     id 'org.jetbrains.kotlin.android'
 }
 
@@ -12,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.ajinkya.formula1"
-        minSdk 21
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -54,6 +53,33 @@ android {
 
 dependencies {
 
+    implementation(project(":core:designsystem"))
+    implementation(project(":feature:constructor"))
+    implementation(project(":feature:driver"))
+    implementation(project(":feature:schedule"))
+
+    //android
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    //compose
+    implementation "androidx.activity:activity-compose:$composeActivity"
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.material3:material3:$material3Version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$composeViewmodel"
+    implementation "androidx.navigation:navigation-compose:$composeNavigation"
+    implementation "androidx.compose.material:material-icons-extended:$composeVersion"
+    implementation "androidx.hilt:hilt-navigation-compose:$hiltNavigationCompose"
+
+    //dagger-hilt
+    implementation "com.google.dagger:hilt-android:$hiltAndroid"
+    kapt "com.google.dagger:hilt-compiler:$hiltCompiler"
+
+
+   /*
     //androidx
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -84,22 +110,20 @@ dependencies {
     implementation "androidx.room:room-ktx:2.5.1"
     kapt "androidx.room:room-compiler:2.5.1"
 
-    //dagger-hilt
-    implementation 'com.google.dagger:hilt-android:2.43'
-    kapt 'com.google.dagger:hilt-compiler:2.43.2'
+
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
 
     //compose
     implementation 'androidx.activity:activity-compose:1.7.0'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
     implementation 'androidx.compose.material3:material3:1.1.0-beta01'
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
     implementation "androidx.navigation:navigation-compose:2.6.0-alpha08"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$composeVersion"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     //test
@@ -118,11 +142,11 @@ dependencies {
     androidTestImplementation 'androidx.arch.core:core-testing:2.2.0'
     androidTestImplementation 'com.google.truth:truth:1.1.3'
     androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
     androidTestImplementation 'app.cash.turbine:turbine:0.12.3'
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.41'
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.41'
 
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$composeVersion"*/
 }

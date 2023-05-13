@@ -8,11 +8,11 @@ import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ajinkya.formula1.data.local.entity.Driver
-import com.ajinkya.formula1.presentation.composable.InfoCard
-import com.ajinkya.formula1.presentation.composable.InfoItem
-import com.ajinkya.formula1.presentation.composable.InfoTitle
-import com.ajinkya.formula1.presentation.theme.GrayLight
+import com.ajinkya.formula1.core.designsystem.component.InfoCard
+import com.ajinkya.formula1.core.designsystem.component.InfoItem
+import com.ajinkya.formula1.core.designsystem.component.InfoTitle
+import com.ajinkya.formula1.core.designsystem.theme.GrayLight
+import com.ajinkya.formula1.core.model.Driver
 
 @Composable
 fun DriverScreen(

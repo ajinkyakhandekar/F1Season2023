@@ -11,8 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ConstructorViewModel @Inject constructor(
-    private val constructorRepository: ConstructorRepository,
-    private val getConstructorsUseCase: GetConstructorsUseCase
+    private val constructorRepository: ConstructorRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ConstructorState())
@@ -25,7 +24,7 @@ class ConstructorViewModel @Inject constructor(
 
     private fun getConstructorStandings() {
         viewModelScope.launch {
-            getConstructorsUseCase()
+            constructorRepository.getConstructors()
                 .flowOn(Dispatchers.IO)
                 .collect { constructorList ->
                     _state.update {
