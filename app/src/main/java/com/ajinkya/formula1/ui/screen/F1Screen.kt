@@ -6,8 +6,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.ajinkya.formula1.R
 import com.ajinkya.formula1.navigation.BottomNavHost
@@ -15,8 +17,14 @@ import com.ajinkya.formula1.navigation.BottomNavHost
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun F1Screen() {
-
     val navController = rememberNavController()
+    val f1ViewModel = hiltViewModel<F1ViewModel>()
+
+    LaunchedEffect(key1 = Unit) {
+        f1ViewModel.loadSchedule()
+        f1ViewModel.loadDriver()
+        f1ViewModel.loadConstructor()
+    }
 
     Scaffold(
         topBar = {
