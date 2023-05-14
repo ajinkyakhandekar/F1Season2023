@@ -1,5 +1,6 @@
 package com.ajinkya.formula1.core.data.repository
 
+import com.ajinkya.formula1.core.data.ResponseStatus
 import com.ajinkya.formula1.core.data.mapper.toDriverEntity
 import com.ajinkya.formula1.core.data.mapper.toModel
 import com.ajinkya.formula1.core.database.data_source.LocalDataSource
@@ -20,11 +21,14 @@ class DriverRepositoryImpl @Inject constructor(
         it.map(DriverEntity::toModel)
     }
 
-    override suspend fun loadDrivers() = flow {
-        val remoteDrivers = remoteDataSource.getDrivers().toDriverEntity()
-        localDataSource.insertDrivers(remoteDrivers)
-        emit("Download Successful")
+    override fun loadDrivers() = flow {
+        emit(ResponseStatus.Loading())
+
+        val driverEntity = remoteDataSource.getDrivers().toDriverEntity()
+        localDataSource.insertDrivers(driverEntity)
+
+        emit(ResponseStatus.Success(driverEntity.map { it.toModel() }))
     }.catch {
-        emit("Download Failed")
+        emit(ResponseStatus.Error(it.message.toString()))
     }
 }
