@@ -54,6 +54,7 @@ android {
 dependencies {
 
     implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
     implementation(project(":feature:constructor"))
     implementation(project(":feature:driver"))
     implementation(project(":feature:schedule"))
@@ -72,6 +73,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$composeViewmodel"
     implementation "androidx.navigation:navigation-compose:$composeNavigation"
     implementation "androidx.compose.material:material-icons-extended:$composeVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:$composeLifecycle"
     implementation "androidx.hilt:hilt-navigation-compose:$hiltNavigationCompose"
 
     //dagger-hilt

@@ -2,10 +2,10 @@ package com.ajinkya.formula1.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,10 +31,10 @@ fun BottomNavHost(
             route = BottomNavScreens.Schedule.route
         ) {
             val scheduleViewModel = hiltViewModel<ScheduleViewModel>()
-            val scheduleState = scheduleViewModel.state.collectAsState().value
+            val scheduleState = scheduleViewModel.state.collectAsStateWithLifecycle()
             ScheduleScreen(
                 modifier = Modifier.padding(12.dp),
-                schedule = scheduleState.schedule
+                schedule = scheduleState.value.schedule
             )
         }
 
@@ -42,10 +42,10 @@ fun BottomNavHost(
             route = BottomNavScreens.Driver.route
         ) {
             val driverViewModel = hiltViewModel<DriverViewModel>()
-            val driverState = driverViewModel.state.collectAsState().value
+            val driverState = driverViewModel.state.collectAsStateWithLifecycle()
             DriverScreen(
                 modifier = Modifier.padding(12.dp),
-                drivers = driverState.drivers
+                drivers = driverState.value.drivers
             )
         }
 
@@ -53,10 +53,10 @@ fun BottomNavHost(
             route = BottomNavScreens.Constructor.route
         ) {
             val constructorViewModel = hiltViewModel<ConstructorViewModel>()
-            val constructorState = constructorViewModel.state.collectAsState().value
+            val constructorState = constructorViewModel.state.collectAsStateWithLifecycle()
             ConstructorScreen(
                 modifier = Modifier.padding(12.dp),
-                constructors = constructorState.constructors
+                constructors = constructorState.value.constructors
             )
         }
     }
