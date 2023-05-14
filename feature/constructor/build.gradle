@@ -56,4 +56,13 @@ dependencies {
     //dagger-hilt
     implementation "com.google.dagger:hilt-android:$hiltAndroid"
     kapt "com.google.dagger:hilt-compiler:$hiltCompiler"
+
+
+    //tests
+    testImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    testImplementation "com.google.truth:truth:$truthVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion"
+    testImplementation 'org.mockito:mockito-core:2.25.0'
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:4.0.0'
 }

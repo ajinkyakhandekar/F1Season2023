@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajinkya.formula1.core.data.repository.ConstructorRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,10 +23,9 @@ class ConstructorViewModel @Inject constructor(
         loadConstructorStandings()
     }
 
-    private fun getConstructorStandings() {
+     fun getConstructorStandings() {
         viewModelScope.launch {
             constructorRepository.getConstructors()
-                .flowOn(Dispatchers.IO)
                 .collect { constructorList ->
                     _state.update {
                         it.copy(constructors = constructorList)
@@ -37,7 +37,6 @@ class ConstructorViewModel @Inject constructor(
     private fun loadConstructorStandings() {
         viewModelScope.launch {
             constructorRepository.loadConstructors()
-                .catch { }
                 .collect()
         }
     }
