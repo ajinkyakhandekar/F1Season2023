@@ -22,28 +22,14 @@ class DriverViewModel @Inject constructor(
     private val _state = MutableStateFlow(DriverState())
     val state = _state.asStateFlow()
 
-    init {
-        getConstructorStandings()
-        loadConstructorStandings()
-    }
-
-    private fun getConstructorStandings() {
+    fun getDriverStandings() {
         viewModelScope.launch {
             driverRepository.getDrivers()
-                .flowOn(Dispatchers.IO)
                 .collect { driverList ->
                     _state.update {
                         it.copy(drivers = driverList)
                     }
                 }
-        }
-    }
-
-    private fun loadConstructorStandings() {
-        viewModelScope.launch {
-            driverRepository.loadDrivers()
-                .catch { }
-                .collect()
         }
     }
 }

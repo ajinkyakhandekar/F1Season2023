@@ -2,6 +2,7 @@ package com.ajinkya.formula1.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -32,6 +33,9 @@ fun BottomNavHost(
         ) {
             val scheduleViewModel = hiltViewModel<ScheduleViewModel>()
             val scheduleState = scheduleViewModel.state.collectAsStateWithLifecycle()
+            LaunchedEffect(key1 = Unit) {
+                scheduleViewModel.getSchedule()
+            }
             ScheduleScreen(
                 modifier = Modifier.padding(12.dp),
                 schedule = scheduleState.value.schedule
@@ -43,6 +47,9 @@ fun BottomNavHost(
         ) {
             val driverViewModel = hiltViewModel<DriverViewModel>()
             val driverState = driverViewModel.state.collectAsStateWithLifecycle()
+            LaunchedEffect(key1 = Unit) {
+                driverViewModel.getDriverStandings()
+            }
             DriverScreen(
                 modifier = Modifier.padding(12.dp),
                 drivers = driverState.value.drivers
@@ -54,6 +61,9 @@ fun BottomNavHost(
         ) {
             val constructorViewModel = hiltViewModel<ConstructorViewModel>()
             val constructorState = constructorViewModel.state.collectAsStateWithLifecycle()
+            LaunchedEffect(key1 = Unit) {
+                constructorViewModel.getConstructorStandings()
+            }
             ConstructorScreen(
                 modifier = Modifier.padding(12.dp),
                 constructors = constructorState.value.constructors

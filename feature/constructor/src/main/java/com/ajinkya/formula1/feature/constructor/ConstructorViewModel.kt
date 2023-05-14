@@ -18,11 +18,6 @@ class ConstructorViewModel @Inject constructor(
     private val _state = MutableStateFlow(ConstructorState())
     val state = _state.asStateFlow()
 
-    init {
-        getConstructorStandings()
-        loadConstructorStandings()
-    }
-
      fun getConstructorStandings() {
         viewModelScope.launch {
             constructorRepository.getConstructors()
@@ -31,13 +26,6 @@ class ConstructorViewModel @Inject constructor(
                         it.copy(constructors = constructorList)
                     }
                 }
-        }
-    }
-
-    private fun loadConstructorStandings() {
-        viewModelScope.launch {
-            constructorRepository.loadConstructors()
-                .collect()
         }
     }
 }
