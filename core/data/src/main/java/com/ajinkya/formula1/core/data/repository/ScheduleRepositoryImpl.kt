@@ -1,9 +1,9 @@
 package com.ajinkya.formula1.core.data.repository
 
+import com.ajinkya.formula1.core.data.ResponseStatus
 import com.ajinkya.formula1.core.data.mapper.toModel
 import com.ajinkya.formula1.core.data.mapper.toScheduleEntity
 import com.ajinkya.formula1.core.database.data_source.LocalDataSource
-import com.ajinkya.formula1.core.database.entity.ConstructorEntity
 import com.ajinkya.formula1.core.database.entity.ScheduleEntity
 import com.ajinkya.formula1.core.network.data_source.RemoteDataSource
 import kotlinx.coroutines.flow.catch
@@ -20,11 +20,14 @@ class ScheduleRepositoryImpl @Inject constructor(
         it.map(ScheduleEntity::toModel)
     }
 
-    override suspend fun loadSchedule() = flow {
-        val remoteSchedule = remoteDataSource.getSchedule().toScheduleEntity()
-        localDataSource.insertSchedule(remoteSchedule)
-        emit("Download Successful")
+    override fun loadSchedule() = flow {
+        emit(ResponseStatus.Loading())
+
+        val scheduleEntity = remoteDataSource.getSchedule().toScheduleEntity()
+        localDataSource.insertSchedule(scheduleEntity)
+
+        emit(ResponseStatus.Success(scheduleEntity.map { it.toModel() }))
     }.catch {
-        emit("Download Failed")
+        emit(ResponseStatus.Error(it.message.toString()))
     }
 }

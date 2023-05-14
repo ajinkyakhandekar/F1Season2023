@@ -1,5 +1,6 @@
 package com.ajinkya.formula1.core.data.repository
 
+import com.ajinkya.formula1.core.data.ResponseStatus
 import com.ajinkya.formula1.core.data.mapper.toConstructorEntity
 import com.ajinkya.formula1.core.data.mapper.toModel
 import com.ajinkya.formula1.core.database.data_source.LocalDataSource
@@ -14,15 +15,19 @@ class ConstructorRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : ConstructorRepository {
+
     override fun getConstructors() = localDataSource.getConstructors().map {
         it.map(ConstructorEntity::toModel)
     }
 
-    override suspend fun loadConstructors() = flow {
-        val remoteConstructors = remoteDataSource.getConstructors()
-        localDataSource.insertConstructors(remoteConstructors.toConstructorEntity())
-        emit("Download Successful")
+    override fun loadConstructors() = flow {
+        emit(ResponseStatus.Loading())
+
+        val constructorEntity = remoteDataSource.getConstructors().toConstructorEntity()
+        localDataSource.insertConstructors(constructorEntity)
+
+        emit(ResponseStatus.Success(constructorEntity.map { it.toModel() }))
     }.catch {
-        emit("Download Failed")
+        emit(ResponseStatus.Error(it.message.toString()))
     }
 }
