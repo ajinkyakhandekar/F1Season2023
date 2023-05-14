@@ -24,28 +24,14 @@ class ScheduleViewModel @Inject constructor(
     private val _state = MutableStateFlow(ScheduleState())
     val state = _state.asStateFlow()
 
-    init {
-        getSchedule()
-        loadSchedule()
-    }
-
-    private fun getSchedule() {
+    fun getSchedule() {
         viewModelScope.launch {
             getScheduleUseCase()
-                .flowOn(Dispatchers.IO)
                 .collect { schedule ->
                     _state.update {
                         it.copy(schedule = schedule)
                     }
                 }
-        }
-    }
-
-    private fun loadSchedule() {
-        viewModelScope.launch {
-            scheduleRepository.loadSchedule()
-                .catch { }
-                .collect()
         }
     }
 }
