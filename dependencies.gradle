@@ -11,6 +11,7 @@ ext {
     composeVersion = "1.4.0"
     composeActivity = "1.7.0"
     composeViewmodel = "2.6.1"
+    composeLifecycle = "2.6.1"
     composeNavigation = "2.6.0-alpha08"
 
     // androidx
