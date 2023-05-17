@@ -66,7 +66,11 @@ fun BottomNavBar(
                     )
                 },
                 onClick = {
-                    navController.navigate(screen.route)
+                    navController.navigate(screen.route){
+                        popUpTo(navController.graph.id){
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }
