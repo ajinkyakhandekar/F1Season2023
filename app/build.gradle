@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.ajinkya.formula1.app.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary true
         }
@@ -71,7 +71,7 @@ dependencies {
     implementation "androidx.compose.material:material:$composeVersion"
     implementation "androidx.compose.material3:material3:$material3Version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$composeViewmodel"
-    implementation "androidx.navigation:navigation-compose:$composeNavigation"
+    implementation "androidx.navigation:navigation-compose:$navigationVersion"
     implementation "androidx.compose.material:material-icons-extended:$composeVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$composeLifecycle"
     implementation "androidx.hilt:hilt-navigation-compose:$hiltNavigationCompose"
@@ -79,4 +79,14 @@ dependencies {
     //dagger-hilt
     implementation "com.google.dagger:hilt-android:$hiltAndroid"
     kapt "com.google.dagger:hilt-compiler:$hiltCompiler"
+
+    //test
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+    androidTestImplementation "androidx.compose.ui:ui-test-manifest:$composeVersion"
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigationVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hiltAndroid"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltAndroid"
+
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -20,7 +21,7 @@ import com.ajinkya.formula1.feature.schedule.ScheduleViewModel
 @Composable
 fun BottomNavHost(
     navController: NavHostController,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
@@ -37,7 +38,8 @@ fun BottomNavHost(
                 scheduleViewModel.getSchedule()
             }
             ScheduleScreen(
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier.padding(12.dp)
+                    .testTag("ScheduleScreen"),
                 schedule = scheduleState.value.schedule
             )
         }
@@ -51,7 +53,8 @@ fun BottomNavHost(
                 driverViewModel.getDriverStandings()
             }
             DriverScreen(
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier.padding(12.dp)
+                    .testTag("DriverScreen"),
                 drivers = driverState.value.drivers
             )
         }
@@ -65,7 +68,8 @@ fun BottomNavHost(
                 constructorViewModel.getConstructorStandings()
             }
             ConstructorScreen(
-                modifier = Modifier.padding(12.dp),
+                modifier = Modifier.padding(12.dp)
+                    .testTag("ConstructorScreen"),
                 constructors = constructorState.value.constructors
             )
         }

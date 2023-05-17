@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -43,6 +44,7 @@ fun BottomNavBar(
             } == true
 
             NavigationBarItem(
+                modifier = Modifier.testTag(screen.tag),
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = DarkOrange,
                     selectedTextColor = Color.Black,
